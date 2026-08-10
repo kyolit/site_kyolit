@@ -30,47 +30,15 @@ window.addEventListener('resize', () => {
 const contactForm = document.getElementById('contactForm');
 if (contactForm) {
   const legacySuccess = document.getElementById('formSuccess');
-  const status = document.createElement('div');
-  status.className = 'form-status';
-  status.setAttribute('role', 'status');
-  status.setAttribute('aria-live', 'polite');
-  contactForm.parentNode.insertBefore(status, contactForm);
   if (legacySuccess) legacySuccess.remove();
 
-  contactForm.addEventListener('submit', async (event) => {
-    event.preventDefault();
-    if (!contactForm.reportValidity()) return;
-
-    const submitButton = contactForm.querySelector('button[type="submit"]');
-    const originalText = submitButton?.textContent;
-    status.className = 'form-status is-sending';
-    status.textContent = 'Envoi de votre demande en cours…';
-    if (submitButton) {
-      submitButton.disabled = true;
-      submitButton.textContent = 'Envoi en cours…';
-    }
-
-    try {
-      const data = new FormData(contactForm);
-      const response = await fetch('https://formsubmit.co/ajax/contact@kyolit.nc', {
-        method: 'POST',
-        headers: { 'Accept': 'application/json' },
-        body: data
-      });
-      if (!response.ok) throw new Error('Réponse du service invalide');
-      const result = await response.json();
-      if (result.success === 'false' || result.success === false) throw new Error(result.message || 'Échec de l’envoi');
-      status.className = 'form-status is-success';
-      status.textContent = 'Votre demande a bien été envoyée à contact@kyolit.nc.';
-      contactForm.reset();
-    } catch (error) {
-      status.className = 'form-status is-error';
-      status.textContent = 'L’envoi automatique n’a pas abouti. Réessayez ou contactez KYÖL IT par téléphone, WhatsApp ou e-mail.';
-    } finally {
-      if (submitButton) {
-        submitButton.disabled = false;
-        submitButton.textContent = originalText;
-      }
+  // Le formulaire contact utilise l'action HTML native pour FormSubmit.
+  // On ne bloque pas son soumission avec un appel fetch AJAX, car FormSubmit
+  // exige une soumission HTTP standard et refuse ce mode de navigation lorsque
+  // le site est servi directement en file://.
+  contactForm.addEventListener('submit', () => {
+    if (window.location.protocol === 'file:') {
+      console.warn('Le formulaire de contact doit être servi sur un serveur HTTP(S) pour envoyer automatiquement un e-mail via FormSubmit.');
     }
   });
 }
