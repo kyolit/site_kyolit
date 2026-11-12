@@ -936,7 +936,7 @@ body:not(.home-page) .page-mascot{display:none!important}
 .scroll-hint{display:inline-flex;flex-direction:column;align-items:center;gap:6px;margin-top:34px;color:var(--blue);font-weight:700;text-decoration:none;font-size:.92rem}
 .scroll-arrow{display:grid;place-items:center;width:40px;height:40px;border-radius:50%;border:2px solid var(--cyan);animation:bounceDown 1.8s infinite}
 @keyframes bounceDown{0%,100%{transform:translateY(0)}50%{transform:translateY(7px)}}
-.home-block{scroll-margin-top:110px}
+.home-block,.reviews-section{scroll-margin-top:110px}
 .home-services-grid{max-width:1180px;margin:0 auto;display:grid;grid-template-columns:repeat(4,1fr);gap:20px}
 .home-service{width:auto;display:flex;flex-direction:column;text-decoration:none;color:inherit;transition:transform .2s,border-color .2s}
 .home-service:hover,.home-service:focus-visible{transform:translateY(-4px);border-color:var(--cyan)}
