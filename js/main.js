@@ -42,3 +42,46 @@ if (contactForm) {
     }
   });
 }
+
+// Services : ouverture d'un volet de détail par carte (un seul ouvert à la fois)
+const serviceToggles = document.querySelectorAll('.service-toggle');
+if (serviceToggles.length) {
+  document.documentElement.classList.add('js');
+
+  const mobileQuery = window.matchMedia('(max-width:760px)');
+  const panelsHost = document.querySelector('.service-panels');
+
+  function openService(id, focusPanel) {
+    serviceToggles.forEach((btn) => {
+      const panel = document.getElementById(btn.getAttribute('aria-controls'));
+      const isTarget = btn.id === 'tab-' + id;
+      btn.setAttribute('aria-expanded', String(isTarget));
+      panel?.classList.toggle('open', isTarget);
+      // Sur mobile, le volet s'affiche juste sous la carte cliquée
+      if (isTarget && panel) {
+        if (mobileQuery.matches) btn.after(panel);
+        else panelsHost?.appendChild(panel);
+      }
+      if (isTarget && panel && focusPanel) {
+        panel.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        panel.focus({ preventScroll: true });
+      }
+    });
+    if (id) history.replaceState(null, '', '#' + id);
+    else history.replaceState(null, '', location.pathname);
+  }
+
+  serviceToggles.forEach((btn) => btn.addEventListener('click', () => {
+    const id = btn.id.replace('tab-', '');
+    openService(btn.getAttribute('aria-expanded') === 'true' ? null : id, true);
+  }));
+  document.querySelectorAll('.service-panel-close').forEach((btn) => btn.addEventListener('click', () => {
+    const id = btn.closest('.service-panel').id.replace('panel-', '');
+    openService(null, false);
+    document.getElementById('tab-' + id)?.focus();
+  }));
+
+  // Lien direct possible : services.html#securite
+  const initial = location.hash.slice(1);
+  if (document.getElementById('tab-' + initial)) openService(initial, false);
+}
