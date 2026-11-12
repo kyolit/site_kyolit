@@ -910,3 +910,52 @@ body:not(.home-page) .page-mascot{display:none!important}
   .service-panel-visual img{max-width:240px}
 }
 @media (prefers-reduced-motion:reduce){.js .service-panel.open{animation:none}.service-toggle{transition:none}}
+
+/* Services (PC) : cartes à gauche, volet à droite */
+@media (min-width:1025px){
+  .services-layout{max-width:1180px;margin:36px auto 0;display:grid;grid-template-columns:330px 1fr;gap:28px;align-items:start}
+  .services-layout .services-grid-4{grid-template-columns:1fr;margin:0;gap:14px}
+  .services-layout .service-toggle{min-height:0;padding:18px 20px;display:grid;grid-template-columns:48px 1fr;column-gap:14px;align-items:center}
+  .services-layout .service-toggle .service-icon{grid-row:span 2;width:48px;height:48px;margin:0;font-size:1.35rem}
+  .services-layout .service-card-title{margin:0 0 2px;font-size:1rem}
+  .services-layout .service-card-text{font-size:.82rem;line-height:1.45}
+  .services-layout .service-more{display:none}
+  .services-layout .service-toggle[aria-expanded="true"]{transform:translateX(6px)}
+  .services-layout .service-panels{margin:0;position:sticky;top:120px}
+  .services-layout .service-panel{margin:0;grid-template-columns:1.35fr 1fr;padding:32px}
+  .services-layout .service-panel-close{display:none!important}
+}
+.service-panel-visual img{max-width:320px}
+
+/* Accueil */
+.hero-lead{max-width:760px;margin:14px auto 0;color:var(--muted);font-size:1.08rem}
+.audience-grid{max-width:1180px;margin:36px auto 0;display:grid;grid-template-columns:repeat(4,1fr);gap:20px;text-align:left}
+.audience-card{background:#fff;border:1px solid var(--line);border-radius:22px;padding:24px;box-shadow:var(--shadow)}
+.audience-card h3{font-size:1.08rem;color:var(--navy);margin:0 0 10px;font-weight:800}
+.audience-card p{font-size:.9rem;color:#5d6b83;margin:0;line-height:1.6}
+.scroll-hint{display:inline-flex;flex-direction:column;align-items:center;gap:6px;margin-top:34px;color:var(--blue);font-weight:700;text-decoration:none;font-size:.92rem}
+.scroll-arrow{display:grid;place-items:center;width:40px;height:40px;border-radius:50%;border:2px solid var(--cyan);animation:bounceDown 1.8s infinite}
+@keyframes bounceDown{0%,100%{transform:translateY(0)}50%{transform:translateY(7px)}}
+.home-block{scroll-margin-top:110px}
+.home-services-grid{max-width:1180px;margin:0 auto;display:grid;grid-template-columns:repeat(4,1fr);gap:20px}
+.home-service{width:auto;display:flex;flex-direction:column;text-decoration:none;color:inherit;transition:transform .2s,border-color .2s}
+.home-service:hover,.home-service:focus-visible{transform:translateY(-4px);border-color:var(--cyan)}
+.home-block-link{text-align:center;margin:30px 0 0}
+.reviews-section{background:var(--pale-2)}
+.reviews-score{color:#e3a008;font-size:1.05rem}
+.reviews-grid{max-width:1180px;margin:0 auto;display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.review-card{margin:0;background:#fff;border:1px solid var(--line);border-radius:22px;padding:24px;box-shadow:var(--shadow);display:flex;flex-direction:column}
+.review-stars{color:#f5b301;letter-spacing:2px;margin-bottom:10px}
+.review-card blockquote{margin:0 0 14px;color:#3d4a62;font-size:.93rem;line-height:1.6;flex:1}
+.review-card figcaption{font-weight:700;color:var(--navy)}
+.reviews-more{text-align:center;margin:26px 0 0}
+.reviews-more a{color:var(--blue);font-weight:700}
+.home-contact-list{list-style:none;padding:0;margin:18px 0 0;display:flex;flex-wrap:wrap;gap:12px 22px}
+.home-contact-list a{color:#fff;font-weight:700;text-decoration:none}
+.home-contact-list a:hover{text-decoration:underline}
+.js .reveal{opacity:0;transform:translateY(40px);transition:opacity .7s ease,transform .7s ease}
+.js .reveal.visible{opacity:1;transform:none}
+@media (max-width:1024px){.audience-grid,.home-services-grid{grid-template-columns:repeat(2,1fr)}.reviews-grid{grid-template-columns:repeat(2,1fr)}}
+@media (max-width:760px){.audience-grid,.home-services-grid,.reviews-grid{grid-template-columns:1fr;padding:0 4px}.hero-lead{font-size:.98rem}}
+@media (prefers-reduced-motion:reduce){.js .reveal{opacity:1;transform:none;transition:none}.scroll-arrow{animation:none}}
+.services-layout .service-panel{align-items:start}

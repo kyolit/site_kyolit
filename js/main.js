@@ -63,7 +63,7 @@ if (serviceToggles.length) {
         else panelsHost?.appendChild(panel);
       }
       if (isTarget && panel && focusPanel) {
-        panel.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        if (mobileQuery.matches) panel.scrollIntoView({ behavior: 'smooth', block: 'start' });
         panel.focus({ preventScroll: true });
       }
     });
@@ -73,6 +73,8 @@ if (serviceToggles.length) {
 
   serviceToggles.forEach((btn) => btn.addEventListener('click', () => {
     const id = btn.id.replace('tab-', '');
+    const isOpen = btn.getAttribute('aria-expanded') === 'true';
+    if (isOpen && !mobileQuery.matches) return; // sur PC, un volet reste toujours affiché
     openService(btn.getAttribute('aria-expanded') === 'true' ? null : id, true);
   }));
   document.querySelectorAll('.service-panel-close').forEach((btn) => btn.addEventListener('click', () => {
@@ -82,6 +84,26 @@ if (serviceToggles.length) {
   }));
 
   // Lien direct possible : services.html#securite
+  // Lien direct possible : services.html#securite ; sinon, sur PC, le premier volet est ouvert
   const initial = location.hash.slice(1);
   if (document.getElementById('tab-' + initial)) openService(initial, false);
+  else if (!mobileQuery.matches) {
+    openService(serviceToggles[0].id.replace('tab-', ''), false);
+    history.replaceState(null, '', location.pathname);
+  }
+}
+
+// Accueil : apparition progressive des sections au défilement
+const revealBlocks = document.querySelectorAll('.reveal');
+if (revealBlocks.length && 'IntersectionObserver' in window) {
+  document.documentElement.classList.add('js');
+  const revealObserver = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        revealObserver.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.12 });
+  revealBlocks.forEach((block) => revealObserver.observe(block));
 }
