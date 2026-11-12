@@ -1,4 +1,4 @@
-KYÖL Assistance Informatique - version responsive
+KYÖL Informatique - version responsive
 
 Modifications de cette version :
 - menu de navigation cliquable sur tablette et smartphone ;
