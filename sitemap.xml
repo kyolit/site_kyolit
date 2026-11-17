@@ -7,8 +7,33 @@
   </url>
   <url>
     <loc>https://kyol.nc/services</loc>
-    <lastmod>2026-11-12</lastmod>
+    <lastmod>2026-11-17</lastmod>
     <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://kyol.nc/informatique-professions-liberales</loc>
+    <lastmod>2026-11-17</lastmod>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://kyol.nc/depannage-informatique</loc>
+    <lastmod>2026-11-17</lastmod>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://kyol.nc/securite-sauvegarde</loc>
+    <lastmod>2026-11-17</lastmod>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://kyol.nc/reseau-wifi</loc>
+    <lastmod>2026-11-17</lastmod>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://kyol.nc/formation-microsoft-365</loc>
+    <lastmod>2026-11-17</lastmod>
+    <priority>0.8</priority>
   </url>
   <url>
     <loc>https://kyol.nc/zones-intervention</loc>
